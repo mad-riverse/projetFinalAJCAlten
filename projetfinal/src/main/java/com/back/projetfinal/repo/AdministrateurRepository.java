@@ -1,9 +1,9 @@
 package com.back.projetfinal.repo;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.back.projetfinal.business.Administrateur;
 
-public interface AdministrateurRepository extends Repository<Administrateur, String> {
+public interface AdministrateurRepository extends JpaRepository<Administrateur, String> {
 
 }

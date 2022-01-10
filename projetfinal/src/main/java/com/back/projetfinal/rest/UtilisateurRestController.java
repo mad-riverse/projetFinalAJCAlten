@@ -3,6 +3,7 @@ package com.back.projetfinal.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,18 +30,21 @@ public class UtilisateurRestController {
 		return "hello";
 	}
 
+	@CrossOrigin
 	@GetMapping("/user")
 	public List<Utilisateur> getAllUtilisateur(){
 		MyLogger.log.info("rest service get/user/user call");
 		return repo.findAll();
 	}
 	
+	@CrossOrigin
 	@GetMapping("/user/{id}")
-	public Utilisateur getUtilisateur(@PathVariable(name="id") String pseudo){
-		MyLogger.log.info("rest service get/user/hello/id call");
-		return repo.findById(pseudo).get();
+	public Utilisateur getUtilisateur(@PathVariable(name="id") String email){
+		MyLogger.log.info("rest service get/user/user/id call");
+		return repo.findById(email).get();
 	}
 	
+	@CrossOrigin
 	@PostMapping("/user")
 	public String createUtilisateur(@RequestBody Utilisateur user){
 		MyLogger.log.info("rest service post/user/user call");
@@ -48,6 +52,7 @@ public class UtilisateurRestController {
 		return "Utilisateur ajouté";
 	}
 	
+	@CrossOrigin
 	@DeleteMapping("/user")
 	public String delete(@RequestBody Utilisateur user) {
 		MyLogger.log.info("rest service delete/user/user call");
@@ -55,6 +60,7 @@ public class UtilisateurRestController {
 		return "Utilisateur suprimé";
 	}
 	
+	@CrossOrigin
 	@PutMapping("/user")
 	public String update(@RequestBody Utilisateur user) {
 		MyLogger.log.info("rest service put/user/user call");
@@ -64,3 +70,4 @@ public class UtilisateurRestController {
 	
 	
 }
+

@@ -26,7 +26,6 @@ public class FicheMetier {
 	private int version;
 
 	public FicheMetier() {
-		super();
 	}
 
 	public int getCodeMetier() {
