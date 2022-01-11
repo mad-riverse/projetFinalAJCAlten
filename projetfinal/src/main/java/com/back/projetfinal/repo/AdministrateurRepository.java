@@ -6,4 +6,5 @@ import com.back.projetfinal.business.Administrateur;
 
 public interface AdministrateurRepository extends JpaRepository<Administrateur, String> {
 
+	Administrateur findByEmailAndPassword(String mail, String pass);
 }
