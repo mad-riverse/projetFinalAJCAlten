@@ -1,5 +1,6 @@
 package com.back.projetfinal.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.back.projetfinal.business.FicheMetier;
 import com.back.projetfinal.business.Utilisateur;
 import com.back.projetfinal.logger.MyLogger;
 import com.back.projetfinal.repo.UtilisateurRepository;
+
+import ch.qos.logback.classic.pattern.Util;
 
 @RestController
 @RequestMapping("/user")
@@ -77,10 +79,17 @@ public class UtilisateurRestController {
 	}
 	
 	
-//	@CrossOrigin
-//	@GetMapping("/user/{id}/offer")
-//	public List<FicheMetier> getFicheMetierByUtilisateur(@PathVariable(name = "id") String email, @PathVariable(name = "pass") String pass) {
-//		MyLogger.log.info("rest service get/user/user/id/pass call");
-//		return repo.findById(email).get().getListeMetierPostule();
-//	}
+	@CrossOrigin
+	@GetMapping("/user/job/{id}")
+	public List<Utilisateur> getFicheMetierByUtilisateur(@PathVariable(name="id") int codeMetier){
+		List<Utilisateur> listAll = repo.findAll();
+		List<Utilisateur> filtedList = new ArrayList<Utilisateur>();
+		for(Utilisateur user : listAll){
+			if(user.getListeMetierPostule().contains(codeMetier)){
+				filtedList.add(user);
+			}
+		}
+		MyLogger.log.info("rest service get/user/user/job/id call");
+		return filtedList;
+	}
 }

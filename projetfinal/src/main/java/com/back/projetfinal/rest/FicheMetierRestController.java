@@ -1,5 +1,6 @@
 package com.back.projetfinal.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,11 +70,18 @@ public class FicheMetierRestController {
 		return "Fiche Metier mis a jour";
 	}
 	
-//	@CrossOrigin
-//	@GetMapping("/job/user/{id}")
-//	public List<String> getUtilisateurByFicheMetier(@PathVariable(name="id") int codeMetier){
-//		MyLogger.log.info("rest service get/jobs/job/id call");
-//		return repo.findById(codeMetier).get().getListeCandidat();
-//	}
+	@CrossOrigin
+	@GetMapping("/job/user/{id}")
+	public List<FicheMetier> getFicheMetierByUtilisateur(@PathVariable(name="id") String email){
+		List<FicheMetier> listAll = repo.findAll();
+		List<FicheMetier> filtedList = new ArrayList<FicheMetier>();
+		for(FicheMetier fMetier : listAll){
+			if(fMetier.getListeCandidat().contains(email)){
+				filtedList.add(fMetier);
+			}
+		}
+		MyLogger.log.info("rest service get/jobs/job/id call");
+		return filtedList;
+	}
 
 }

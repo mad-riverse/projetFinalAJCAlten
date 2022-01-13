@@ -21,25 +21,25 @@ import javax.persistence.JoinColumn;
 public class Utilisateur {
 	
 	@Id
-	protected String email;
+	private String email;
 	
-	protected String password;
+	private String password;
 	
-	protected String nom;
+	private String nom;
 	
-	protected String prenom;
+	private String prenom;
 	
-	protected String telephone;
+	private String telephone;
 	
-//	@ElementCollection
-//	@CollectionTable(
-//			name="offer",
-//			joinColumns={@JoinColumn(name="utilisateur_email")})
-//	@Column(name="liste_offer")
-//	private List<Integer> listeMetierPostule;
+	@ElementCollection
+	@CollectionTable(
+			name="offer",
+			joinColumns={@JoinColumn(name="utilisateur_email")})
+	@Column(name="liste_offer")
+	private List<Integer> listeMetierPostule = new ArrayList<Integer>();
 	
 	@Version
-	protected int version;
+	private int version;
 
 	public Utilisateur() {
 	}
@@ -84,13 +84,13 @@ public class Utilisateur {
 		this.telephone = telephone;
 	}
 
-//	public List<Integer> getListeMetierPostule() {
-//		return listeMetierPostule;
-//	}
-//
-//	public void setListeMetierPostule(List<Integer> listeMetierPostule) {
-//		this.listeMetierPostule = listeMetierPostule;
-//	}
+	public List<Integer> getListeMetierPostule() {
+		return listeMetierPostule;
+	}
+
+	public void setListeMetierPostule(List<Integer> listeMetierPostule) {
+		this.listeMetierPostule = listeMetierPostule;
+	}
 
 	public int getVersion() {
 		return version;

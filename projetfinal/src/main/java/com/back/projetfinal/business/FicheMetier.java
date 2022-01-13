@@ -21,12 +21,12 @@ public class FicheMetier {
 	
 	private int salaireAnnuel;
 	
-//	@ElementCollection
-//	@CollectionTable(
-//			name="postulant",
-//			joinColumns={@JoinColumn(name="codeMetier")})
-//	@Column(name="liste_offer")
-//	private List<String> listeCandidat;
+	@ElementCollection
+	@CollectionTable(
+			name="postulant",
+			joinColumns={@JoinColumn(name="codeMetier")})
+	@Column(name="liste_offer")
+	private List<String> listeCandidat = new ArrayList<String>();
 	
 	private String descriptif;
 	
@@ -60,13 +60,13 @@ public class FicheMetier {
 		this.salaireAnnuel = salaireAnnuel;
 	}
 
-//	public List<String> getListeCandidat() {
-//		return listeCandidat;
-//	}
-//
-//	public void setListeCandidat(List<String> listeCandidat) {
-//		this.listeCandidat = listeCandidat;
-//	}
+	public List<String> getListeCandidat() {
+		return listeCandidat;
+	}
+
+	public void setListeCandidat(List<String> listeCandidat) {
+		this.listeCandidat = listeCandidat;
+	}
 
 	public String getDescriptif() {
 		return descriptif;
