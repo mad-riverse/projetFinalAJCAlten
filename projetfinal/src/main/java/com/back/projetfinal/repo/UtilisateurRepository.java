@@ -7,4 +7,5 @@ import com.back.projetfinal.business.Utilisateur;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, String> {
 
 	Utilisateur findByEmailAndPassword(String mail, String pass);
+	
 }

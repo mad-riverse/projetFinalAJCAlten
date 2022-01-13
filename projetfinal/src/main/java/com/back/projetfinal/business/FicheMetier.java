@@ -1,10 +1,14 @@
 package com.back.projetfinal.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Version;
 
 @Entity
@@ -17,8 +21,12 @@ public class FicheMetier {
 	
 	private int salaireAnnuel;
 	
-	@ManyToMany(mappedBy = "listeMetierPostule")
-	private List<Utilisateur> listeCandidat;
+//	@ElementCollection
+//	@CollectionTable(
+//			name="postulant",
+//			joinColumns={@JoinColumn(name="codeMetier")})
+//	@Column(name="liste_offer")
+//	private List<String> listeCandidat;
 	
 	private String descriptif;
 	
@@ -52,13 +60,13 @@ public class FicheMetier {
 		this.salaireAnnuel = salaireAnnuel;
 	}
 
-	public List<Utilisateur> getListeCandidat() {
-		return listeCandidat;
-	}
-
-	public void setListeCandidat(List<Utilisateur> listeCandidat) {
-		this.listeCandidat = listeCandidat;
-	}
+//	public List<String> getListeCandidat() {
+//		return listeCandidat;
+//	}
+//
+//	public void setListeCandidat(List<String> listeCandidat) {
+//		this.listeCandidat = listeCandidat;
+//	}
 
 	public String getDescriptif() {
 		return descriptif;
@@ -79,7 +87,7 @@ public class FicheMetier {
 	@Override
 	public String toString() {
 		return "FicheMetier [codeMetier=" + codeMetier + ", nomMetier=" + nomMetier + ", salaireAnnuel=" + salaireAnnuel
-				+ ", listeCandidat=" + listeCandidat + ", descriptif=" + descriptif + "]";
+				+ ", descriptif=" + descriptif + "]";
 	}
 
 	

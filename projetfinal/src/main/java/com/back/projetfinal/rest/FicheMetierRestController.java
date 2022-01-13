@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.back.projetfinal.business.FicheMetier;
+import com.back.projetfinal.business.Utilisateur;
 import com.back.projetfinal.logger.MyLogger;
 import com.back.projetfinal.repo.FicheMetierRepository;
 
@@ -22,7 +23,7 @@ import com.back.projetfinal.repo.FicheMetierRepository;
 public class FicheMetierRestController {
 	
 	@Autowired
-	FicheMetierRepository repo;
+	private FicheMetierRepository repo;
 
 	@GetMapping("/hello")
 	public String getHello(){
@@ -39,24 +40,24 @@ public class FicheMetierRestController {
 	
 	@CrossOrigin
 	@GetMapping("/job/{id}")
-	public FicheMetier getAdministrateur(@PathVariable(name="id") int codeMetier){
+	public FicheMetier getFicheMetierById(@PathVariable(name="id") int codeMetier){
 		MyLogger.log.info("rest service get/jobs/job/id call");
 		return repo.findById(codeMetier).get();
 	}
 	
 	@CrossOrigin
 	@PostMapping("/job")
-	public String createAdministrateur(@RequestBody FicheMetier metier){
+	public String createFicheMetier(@RequestBody FicheMetier metier){
 		MyLogger.log.info("rest service post/jobs/job call");
 		repo.save(metier);
 		return "Fiche Metier ajouté";
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/job") // choix : ajouter un id ou l'utiliser avec un boutton
-	public String delete(@RequestBody FicheMetier metier) {
+	@DeleteMapping("/job/{id}") // choix : ajouter un id ou l'utiliser avec un boutton
+	public String delete(@PathVariable(name = "id") Integer codeMetier) {
 		MyLogger.log.info("rest service delete/jobs/job call");
-		repo.delete(repo.findById(metier.getCodeMetier()).get());
+		repo.delete(repo.findById(codeMetier).get());
 		return "Fiche Metier suprimé";
 	}
 	
@@ -68,5 +69,11 @@ public class FicheMetierRestController {
 		return "Fiche Metier mis a jour";
 	}
 	
+//	@CrossOrigin
+//	@GetMapping("/job/user/{id}")
+//	public List<String> getUtilisateurByFicheMetier(@PathVariable(name="id") int codeMetier){
+//		MyLogger.log.info("rest service get/jobs/job/id call");
+//		return repo.findById(codeMetier).get().getListeCandidat();
+//	}
 
 }

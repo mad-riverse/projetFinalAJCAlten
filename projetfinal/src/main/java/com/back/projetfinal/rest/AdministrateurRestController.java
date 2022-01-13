@@ -20,46 +20,47 @@ import com.back.projetfinal.repo.AdministrateurRepository;
 @RestController
 @RequestMapping("/admin")
 public class AdministrateurRestController {
-	
+
 	@Autowired
 	AdministrateurRepository repo;
 
 	@GetMapping("/hello")
-	public String getHello(){
+	public String getHello() {
 		MyLogger.log.info("rest service get/admin/hello call");
 		return "hello";
 	}
 
 	@CrossOrigin
 	@GetMapping("/admin")
-	public List<Administrateur> getAllAdministrateur(){
+	public List<Administrateur> getAllAdministrateur() {
 		MyLogger.log.info("rest service get/admin/admin call");
 		return repo.findAll();
 	}
-	
+
 	@CrossOrigin
 	@GetMapping("/admin/{id}")
-	public Administrateur getAdministrateur(@PathVariable(name="id") String email){
+	public Administrateur getAdministrateur(@PathVariable(name = "id") String email) {
 		MyLogger.log.info("rest service get/admin/admin/id call");
 		return repo.findById(email).get();
 	}
-	
+
 	@CrossOrigin
 	@PostMapping("/admin")
-	public String createAdministrateur(@RequestBody Administrateur admin){
+	public String createAdministrateur(@RequestBody Administrateur admin) {
 		MyLogger.log.info("rest service post/admin/admin call");
 		repo.save(admin);
 		return "Administrateur ajoutÃ©";
 	}
-	
+
 	@CrossOrigin
-	@DeleteMapping("/admin") // choix : ajouter un id ou l'utiliser avec un boutton
-	public String delete(@RequestBody Administrateur admin) {
+	@DeleteMapping("/admin/{id}") // choix : ajouter un id ou l'utiliser avec un
+								// boutton
+	public String delete(@PathVariable(name = "id") String email) {
 		MyLogger.log.info("rest service delete/admin/admin call");
-		repo.delete(repo.findById(admin.getEmail()).get());
+		repo.delete(repo.findById(email).get());
 		return "Administrateur suprimÃ©";
 	}
-	
+
 	@CrossOrigin
 	@PutMapping("/admin")
 	public String update(@RequestBody Administrateur admin) {
@@ -67,6 +68,12 @@ public class AdministrateurRestController {
 		repo.save(admin);
 		return "Administrateur mis a jour";
 	}
-	
-}
 
+	@CrossOrigin
+	@GetMapping("/admin/{id}/{pass}")
+	public Administrateur connect(@PathVariable(name = "id") String email, @PathVariable(name = "pass") String pass) {
+		MyLogger.log.info("rest service get/admin/admin/id/pass call");
+		return repo.findByEmailAndPassword(email, pass);
+	}
+
+}

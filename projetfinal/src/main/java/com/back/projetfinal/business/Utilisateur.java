@@ -1,15 +1,19 @@
 package com.back.projetfinal.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.persistence.JoinColumn;
 
 
 @Entity
@@ -27,10 +31,12 @@ public class Utilisateur {
 	
 	protected String telephone;
 	
-	@ManyToMany
-	@JoinTable(name = "candidat_offre",
-	joinColumns ={@JoinColumn(name = "candidat_email")}, inverseJoinColumns = {@JoinColumn(name = "code_metier")})
-	private List<FicheMetier> listeMetierPostule;
+//	@ElementCollection
+//	@CollectionTable(
+//			name="offer",
+//			joinColumns={@JoinColumn(name="utilisateur_email")})
+//	@Column(name="liste_offer")
+//	private List<Integer> listeMetierPostule;
 	
 	@Version
 	protected int version;
@@ -78,13 +84,13 @@ public class Utilisateur {
 		this.telephone = telephone;
 	}
 
-	public List<FicheMetier> getListeMetierPostule() {
-		return listeMetierPostule;
-	}
-
-	public void setListeMetierPostule(List<FicheMetier> listeMetierPostule) {
-		this.listeMetierPostule = listeMetierPostule;
-	}
+//	public List<Integer> getListeMetierPostule() {
+//		return listeMetierPostule;
+//	}
+//
+//	public void setListeMetierPostule(List<Integer> listeMetierPostule) {
+//		this.listeMetierPostule = listeMetierPostule;
+//	}
 
 	public int getVersion() {
 		return version;
