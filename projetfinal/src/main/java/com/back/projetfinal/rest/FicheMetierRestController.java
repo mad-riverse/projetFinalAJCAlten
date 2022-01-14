@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.back.projetfinal.business.FicheMetier;
-import com.back.projetfinal.business.Utilisateur;
 import com.back.projetfinal.logger.MyLogger;
 import com.back.projetfinal.repo.FicheMetierRepository;
 
@@ -55,8 +54,8 @@ public class FicheMetierRestController {
 	}
 	
 	@CrossOrigin
-	@DeleteMapping("/job/{id}") // choix : ajouter un id ou l'utiliser avec un boutton
-	public String delete(@PathVariable(name = "id") Integer codeMetier) {
+	@DeleteMapping("/job/{id}") 
+	public String delete(@PathVariable(name = "id") int codeMetier) {
 		MyLogger.log.info("rest service delete/jobs/job call");
 		repo.delete(repo.findById(codeMetier).get());
 		return "Fiche Metier suprimé";
@@ -82,6 +81,13 @@ public class FicheMetierRestController {
 		}
 		MyLogger.log.info("rest service get/jobs/job/id call");
 		return filtedList;
+	}
+	
+	@CrossOrigin
+	@GetMapping("/job/name/{id}")
+	public List<FicheMetier> getFicheMetierByNomContaining(@PathVariable(name="id") String filtre){
+		MyLogger.log.info("rest service get/jobs/job/name/id call");
+		return repo.findByNomMetierContaining(filtre);
 	}
 
 }

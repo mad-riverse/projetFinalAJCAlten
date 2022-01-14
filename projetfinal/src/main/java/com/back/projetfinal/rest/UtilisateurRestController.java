@@ -18,8 +18,6 @@ import com.back.projetfinal.business.Utilisateur;
 import com.back.projetfinal.logger.MyLogger;
 import com.back.projetfinal.repo.UtilisateurRepository;
 
-import ch.qos.logback.classic.pattern.Util;
-
 @RestController
 @RequestMapping("/user")
 public class UtilisateurRestController {
@@ -91,5 +89,12 @@ public class UtilisateurRestController {
 		}
 		MyLogger.log.info("rest service get/user/user/job/id call");
 		return filtedList;
+	}
+	
+	@CrossOrigin
+	@GetMapping("/user/name/{id}")
+	public List<Utilisateur> getUtilisateurByNomContaining(@PathVariable(name="id") String filtre){
+		MyLogger.log.info("rest service get/user/user/name/id call");
+		return repo.findByNomContaining(filtre);
 	}
 }

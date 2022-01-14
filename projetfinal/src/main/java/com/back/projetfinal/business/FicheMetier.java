@@ -24,8 +24,8 @@ public class FicheMetier {
 	@ElementCollection
 	@CollectionTable(
 			name="postulant",
-			joinColumns={@JoinColumn(name="codeMetier")})
-	@Column(name="liste_offer")
+			joinColumns={@JoinColumn(name="code_metier")})
+	@Column(name="email_candidat")
 	private List<String> listeCandidat = new ArrayList<String>();
 	
 	private String descriptif;

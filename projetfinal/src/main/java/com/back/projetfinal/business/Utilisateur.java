@@ -33,9 +33,9 @@ public class Utilisateur {
 	
 	@ElementCollection
 	@CollectionTable(
-			name="offer",
+			name="offre_postule",
 			joinColumns={@JoinColumn(name="utilisateur_email")})
-	@Column(name="liste_offer")
+	@Column(name="code_offre")
 	private List<Integer> listeMetierPostule = new ArrayList<Integer>();
 	
 	@Version
