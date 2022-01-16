@@ -66,7 +66,7 @@ public class ConsoleService implements CommandLineRunner {
 	
 	private void init(){
 		Administrateur root = new Administrateur();
-		root.setEmail("roott@root.root");
+		root.setEmail("root@root.root");
 		root.setPassword("root");
 		root.setNom("root");
 		repoA.save(root);
